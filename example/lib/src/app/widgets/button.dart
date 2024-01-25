@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class HomePageButton extends StatelessWidget {
-  final String text;
+  final String? text;
   const HomePageButton({@required this.text});
 
   @override
@@ -21,7 +21,7 @@ class HomePageButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Text(
-          text,
+          text ?? '',
           style: const TextStyle(
               color: Colors.white,
               fontSize: 20.0,

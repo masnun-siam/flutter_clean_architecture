@@ -1,12 +1,13 @@
-import './home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
 import '../../../data/repositories/data_users_repository.dart';
+import './home_controller.dart';
 
-class HomePage extends View {
-  const HomePage({Key key, this.title}) : super(key: key);
+class HomePage extends ViewWidget {
+  const HomePage({super.key, this.title});
 
-  final String title;
+  final String? title;
 
   @override
   HomePageState createState() =>
@@ -14,14 +15,14 @@ class HomePage extends View {
       HomePageState();
 }
 
-class HomePageState extends ViewState<HomePage, HomeController> {
+class HomePageState extends ViewWidgetState<HomePage, HomeController> {
   HomePageState() : super(HomeController(DataUsersRepository()));
 
   @override
   Widget get view {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title ?? ''),
       ),
       body: Scaffold(
         key:
@@ -43,8 +44,8 @@ class HomePageState extends ViewState<HomePage, HomeController> {
               ControlledWidgetBuilder<HomeController>(
                 builder: (context, controller) {
                   return Text(
-                    controller.user == null ? '' : '${controller.user}',
-                    style: Theme.of(context).textTheme.headline4,
+                    '${controller.user}',
+                    style: Theme.of(context).textTheme.headlineMedium,
                   );
                 },
               ),
@@ -62,7 +63,7 @@ class HomePageState extends ViewState<HomePage, HomeController> {
               ControlledWidgetBuilder<HomeController>(
                 builder: (context, controller) {
                   return ElevatedButton(
-                    onPressed: controller.getUserwithError,
+                    onPressed: controller.getUserWithError,
                     child: const Text(
                       'Get User Error',
                       style: TextStyle(color: Colors.white),

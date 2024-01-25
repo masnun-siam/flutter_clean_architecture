@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets(
-      'Given stateless button when homepagebutton is added to parent widget then return homepagebutton',
+      'Given stateless button when homePageButton is added to parent widget then return homePageButton',
       (tester) async {
     await tester.pumpWidget(const MaterialApp(
         home: Scaffold(
@@ -25,16 +25,16 @@ void main() {
   });
 }
 
-class TestPage extends View {
+class TestPage extends ViewWidget {
   const TestPage({
-    Key key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   TestPageState createState() => TestPageState();
 }
 
-class TestPageState extends ViewState<TestPage, HomeController> {
+class TestPageState extends ViewWidgetState<TestPage, HomeController> {
   TestPageState() : super(HomeController(DataUsersRepository()));
 
   @override

@@ -7,20 +7,20 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 void main() {
   test(
-      'Given getUserUseCase when Parameters user UUID does exist return successfull',
+      'Given getUserUseCase when Parameters user UUID does exist return successful',
       () async {
     GetUserUseCase getUserUseCase;
     _Observer observer;
     getUserUseCase = GetUserUseCase(MockGetUser());
     observer = _Observer();
     getUserUseCase.execute(observer, GetUserUseCaseParams('1000-2000-5600'));
-    while (!observer.status['progress'].contains('done')) {
+    while (!(observer.status['progress']?.contains('done') ?? false)) {
       await Future.delayed(const Duration(seconds: 1));
     }
     expect(observer.status['result'], 'success');
   });
   test(
-      'Given getUserUseCase when getUser and user UUID does exist return the namd and the age',
+      'Given getUserUseCase when getUser and user UUID does exist return the named and the age',
       () async {
     GetUserUseCase getUserUseCase;
     getUserUseCase = GetUserUseCase(MockGetUser());
@@ -37,7 +37,7 @@ void main() {
     getUserUseCase = GetUserUseCase(MockGetUser());
     observer = _Observer();
     getUserUseCase.execute(observer, GetUserUseCaseParams('22222'));
-    while (!observer.status['progress'].contains('done')) {
+    while (!(observer.status['progress']?.contains('done') ?? false)) {
       await Future.delayed(const Duration(seconds: 1));
     }
     expect(observer.status['result'], 'failed');
@@ -74,16 +74,12 @@ class MockGetUser extends Mock implements UsersRepository {
 
   @override
   Future<User> getUser(String uid) async {
-    User testGetUser;
+    User? testGetUser;
     for (var user in users) {
       if (user.uid == uid) {
         testGetUser = user;
       }
     }
-    if (testGetUser != null) {
-      return testGetUser;
-    } else {
-      throw Exception('User not found');
-    }
+    return testGetUser!;
   }
 }

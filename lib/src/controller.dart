@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart'
+    as fca;
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +81,6 @@ abstract class Controller
   late Logger logger;
   late GlobalKey<State<StatefulWidget>> _globalKey;
 
-  @mustCallSuper
   Controller() {
     logger = Logger('$runtimeType');
     _isMounted = true;
@@ -103,11 +103,14 @@ abstract class Controller
         case AppLifecycleState.detached:
           onDetached();
           break;
+        case AppLifecycleState.hidden:
+          onHidden();
+          break;
       }
     }
   }
 
-  /// _refreshes the [ControlledWidgets] and the [StatefulWidgets] that depends on [FlutterCleanArchitecture.getController] of the [View] associated with the [Controller] if it is still mounted.
+  /// _refreshes the [ControlledWidgets] and the [StatefulWidgets] that depends on [FlutterCleanArchitecture.getController] of the [fca.Page] associated with the [Controller] if it is still mounted.
   @protected
   void refreshUI() {
     if (_isMounted) {
@@ -145,7 +148,7 @@ abstract class Controller
     super.dispose();
   }
 
-  /// Retrieves the [State<StatefulWidget>] associated with the [View]
+  /// Retrieves the [State<StatefulWidget>] associated with the [fca.Page]
   @protected
   State<StatefulWidget> getState() {
     assert(_globalKey.currentState != null,
@@ -158,7 +161,7 @@ abstract class Controller
     return _globalKey.currentState!;
   }
 
-  /// Retrieves the [GlobalKey<State<StatefulWidget>>] associated with the [View]
+  /// Retrieves the [GlobalKey<State<StatefulWidget>>] associated with the [fca.Page]
   @protected
   GlobalKey<State<StatefulWidget>> getStateKey() {
     return _globalKey;
@@ -258,6 +261,10 @@ abstract class Controller
   /// ```
   @visibleForOverriding
   void onDetached() {}
+
+  /// All views of an application are hidden, either because the application is about to be paused (on iOS and Android), or because it has been minimized or placed on a desktop that is no longer visible (on non-web desktop), or is running in a window or tab that is no longer visible (on the web).
+  @visibleForOverriding
+  void onHidden() {}
 
   /// Called before the view is deactivated.
   /// When the view is in this context, it means that the view is about to be extracted from the widget tree, but it may be

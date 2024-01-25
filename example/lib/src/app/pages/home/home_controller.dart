@@ -1,13 +1,14 @@
-import './home_presenter.dart';
-import '../../../domain/entities/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
+import '../../../domain/entities/user.dart';
+import './home_presenter.dart';
+
 class HomeController extends Controller {
-  int _counter;
-  User _user;
-  int get counter => _counter;
-  User get user => _user; // data used by the View
+  int? _counter;
+  User? _user;
+  int? get counter => _counter;
+  User? get user => _user; // data used by the View
   final HomePresenter homePresenter;
   // Presenter should always be initialized this way
   HomeController(usersRepo)
@@ -38,10 +39,10 @@ class HomeController extends Controller {
   }
 
   void getUser() => homePresenter.getUser('test-uid');
-  void getUserwithError() => homePresenter.getUser('test-uid231243');
+  void getUserWithError() => homePresenter.getUser('test-uid231243');
 
   void buttonPressed() {
-    _counter++;
+    _counter = (_counter ?? 0) + 1;
     refreshUI();
   }
 
