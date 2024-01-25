@@ -2,7 +2,7 @@ import 'package:example/src/app/pages/home/home_controller.dart';
 import 'package:example/src/app/widgets/button.dart';
 import 'package:example/src/data/repositories/data_users_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as fca;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -25,7 +25,7 @@ void main() {
   });
 }
 
-class TestPage extends ViewWidget {
+class TestPage extends fca.View {
   const TestPage({
     super.key,
   });
@@ -34,7 +34,7 @@ class TestPage extends ViewWidget {
   TestPageState createState() => TestPageState();
 }
 
-class TestPageState extends ViewWidgetState<TestPage, HomeController> {
+class TestPageState extends fca.ViewState<TestPage, HomeController> {
   TestPageState() : super(HomeController(DataUsersRepository()));
 
   @override

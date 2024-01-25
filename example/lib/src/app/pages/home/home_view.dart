@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart'
+    as flutter_clean_architecture;
 
 import '../../../data/repositories/data_users_repository.dart';
 import './home_controller.dart';
 
-class HomePage extends ViewWidget {
+class HomePage extends flutter_clean_architecture.View {
   const HomePage({super.key, this.title});
 
   final String? title;
@@ -15,7 +16,8 @@ class HomePage extends ViewWidget {
       HomePageState();
 }
 
-class HomePageState extends ViewWidgetState<HomePage, HomeController> {
+class HomePageState
+    extends flutter_clean_architecture.ViewState<HomePage, HomeController> {
   HomePageState() : super(HomeController(DataUsersRepository()));
 
   @override
@@ -31,7 +33,8 @@ class HomePageState extends ViewWidgetState<HomePage, HomeController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ControlledWidgetBuilder<HomeController>(
+              flutter_clean_architecture.ControlledWidgetBuilder<
+                  HomeController>(
                 builder: (context, controller) {
                   return Text(
                     'Button pressed ${controller.counter} times.',
@@ -41,7 +44,8 @@ class HomePageState extends ViewWidgetState<HomePage, HomeController> {
               const Text(
                 'The current user is',
               ),
-              ControlledWidgetBuilder<HomeController>(
+              flutter_clean_architecture.ControlledWidgetBuilder<
+                  HomeController>(
                 builder: (context, controller) {
                   return Text(
                     '${controller.user}',
@@ -49,7 +53,8 @@ class HomePageState extends ViewWidgetState<HomePage, HomeController> {
                   );
                 },
               ),
-              ControlledWidgetBuilder<HomeController>(
+              flutter_clean_architecture.ControlledWidgetBuilder<
+                  HomeController>(
                 builder: (context, controller) {
                   return ElevatedButton(
                     onPressed: controller.getUser,
@@ -60,7 +65,8 @@ class HomePageState extends ViewWidgetState<HomePage, HomeController> {
                   );
                 },
               ),
-              ControlledWidgetBuilder<HomeController>(
+              flutter_clean_architecture.ControlledWidgetBuilder<
+                  HomeController>(
                 builder: (context, controller) {
                   return ElevatedButton(
                     onPressed: controller.getUserWithError,
@@ -75,7 +81,8 @@ class HomePageState extends ViewWidgetState<HomePage, HomeController> {
           ),
         ),
       ),
-      floatingActionButton: ControlledWidgetBuilder<HomeController>(
+      floatingActionButton:
+          flutter_clean_architecture.ControlledWidgetBuilder<HomeController>(
         builder: (context, controller) {
           return FloatingActionButton(
             onPressed: () => controller.buttonPressed(),
