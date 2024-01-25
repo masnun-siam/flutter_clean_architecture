@@ -23,7 +23,7 @@ typedef ViewBuilder = Widget Function(BuildContext context);
 ///
 /// The [ResponsiveViewState] also has a default [globalKey] that can be used inside its `builds` function
 /// in a widget to grant easy access to the [Controller], which could then use it to display
-/// snackbars, dialogs, and so on.
+/// snackBars, dialogs, and so on.
 ///
 /// The [ResponsiveViewState] lifecycle is also handled by the [Controller].
 ///
@@ -95,7 +95,7 @@ abstract class ResponsiveViewState<Page extends View, Con extends Controller>
 ///
 /// The [ViewState] also has a default [globalKey] that can be used inside its `build()` function
 /// in a widget to grant easy access to the [Controller], which could then use it to display
-/// snackbars, dialogs, and so on.
+/// snackBars, dialogs, and so on.
 ///
 /// The [ViewState] lifecycle is also handled by the [Controller].
 /// ```dart
